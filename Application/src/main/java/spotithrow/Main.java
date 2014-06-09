@@ -20,11 +20,15 @@ import com.airhacks.afterburner.injection.InjectionProvider;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spotithrow.views.SpotithrowView;
 
 import java.io.IOException;
 
 public class Main extends Application {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
         launch(args);
@@ -32,6 +36,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        logger.info("Starting Spotithrow...");
         SpotithrowView appView = new SpotithrowView();
         Scene scene = new Scene(appView.getView(), 800, 600);
         stage.setTitle("Spotithrow");

@@ -16,21 +16,49 @@
 
 package spotithrow.presentation;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.TilePane;
+import javafx.scene.text.Text;
+import spotithrow.model.DlnaDevice;
+import spotithrow.services.DlnaDeviceListener;
 import spotithrow.services.PlayerService;
 
 import javax.inject.Inject;
+import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
  * Presenter class to select a DLNA player.
  */
-public class SelectPlayerPresenter implements Initializable {
-    @Inject private PlayerService playerService;
+public class SelectPlayerPresenter implements Initializable, DlnaDeviceListener {
+    @FXML TilePane playersTilePane;
+    @Inject PlayerService playerService;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Somehow populate with a list of devices that we can stream to.
+        playerService.addDlnaListener(this);
+    }
+
+    @Override
+    public void deviceAdded(DlnaDevice dlnaDevice) {
+        URL iconUrl = dlnaDevice.getDisplayIcon();
+        ImageView imageView = new ImageView(new Image(iconUrl.toString()));
+        if (imageView.getFitWidth() > 120) {
+            imageView.setFitWidth(120);
+        }
+        playersTilePane.getChildren().add(imageView);
+    }
+
+    @Override
+    public void deviceRemoved(DlnaDevice dlnaDevice) {
+        playersTilePane.getChildren().stream()
+                .filter(node -> node instanceof Text)
+                .filter(node -> ((Text) node).getText().equals(dlnaDevice.getDisplayName()))
+                .forEach(node -> playersTilePane.getChildren().remove(node));
     }
 }

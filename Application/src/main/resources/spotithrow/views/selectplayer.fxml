@@ -8,7 +8,11 @@
    <content>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
-            <TilePane prefHeight="200.0" prefWidth="200.0" />
+            <ScrollPane prefViewportHeight="200.0" prefViewportWidth="200.0">
+               <content>
+                  <TilePane fx:id="playersTilePane" prefHeight="200.0" prefWidth="200.0" />
+               </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
    </content>
