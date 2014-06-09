@@ -26,11 +26,16 @@ if (!System.getProperty("java.version").matches(/^(1\.)?8.*/)) {
 
 repositories {
     mavenCentral()
+
+    maven {
+        url "http://4thline.org/m2"
+    }
 }
 
 dependencies {
     compile "com.cathive.fonts:fonts-fontawesome:3.2.1.0"
     compile "com.airhacks:afterburner.fx:1.3"
+    compile "org.fourthline.cling:cling-core:2.0-alpha3"
     testCompile "junit:junit:4.11"
     testCompile "org.mockito:mockito-all:1.9.5"
 }
