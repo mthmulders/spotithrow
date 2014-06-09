@@ -1,0 +1,24 @@
+apply plugin: 'java'
+apply from: 'javafx.plugin'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+if (!System.getProperty("java.version").matches(/^(1\.)?8.*/)) {
+    throw new GradleException("Java 8 required, ${System.getProperty("java.version")} found")
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "com.cathive.fx:fx-guice:2.1.3"
+    compile "com.cathive.fonts:fonts-fontawesome:3.2.1.0"
+    testCompile "junit:junit:4.11"
+    testCompile "org.mockito:mockito-all:1.9.5"
+}
+
+javafx {
+    mainClass = 'spotithrow.Main'
+}
