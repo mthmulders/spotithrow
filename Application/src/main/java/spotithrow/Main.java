@@ -16,17 +16,30 @@
 
 package spotithrow;
 
+import com.airhacks.afterburner.injection.InjectionProvider;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+import spotithrow.views.SpotithrowView;
+
+import java.io.IOException;
 
 public class Main extends Application {
-
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage stage) throws IOException {
+        SpotithrowView appView = new SpotithrowView();
+        Scene scene = new Scene(appView.getView(), 600, 400);
+        stage.setTitle("Spotithrow");
+        stage.setScene(scene);
+        stage.show();
+    }
 
+    @Override
+    public void stop() throws Exception {
+        InjectionProvider.forgetAll();
     }
 }
