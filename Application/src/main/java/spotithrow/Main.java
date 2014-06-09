@@ -25,6 +25,7 @@ import spotithrow.views.SpotithrowView;
 import java.io.IOException;
 
 public class Main extends Application {
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -32,7 +33,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         SpotithrowView appView = new SpotithrowView();
-        Scene scene = new Scene(appView.getView(), 600, 400);
+        Scene scene = new Scene(appView.getView(), 800, 600);
         stage.setTitle("Spotithrow");
         stage.setScene(scene);
         stage.show();
